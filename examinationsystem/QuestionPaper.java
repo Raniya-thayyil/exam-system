@@ -9,9 +9,9 @@ public class QuestionPaper {
     Subject subject;
     double totalMark;
 
-    public QuestionPaper(Subject subject) {
-        this.subject = subject;        
-    }
+    // public QuestionPaper(Subject subject) {
+    //     this.subject = subject;        
+    // }
 
     public ArrayList<Question> getQuestions() {
         return questions;
@@ -34,7 +34,16 @@ public class QuestionPaper {
     }
 
     public Question getQuestionOf(int questionNumber) {
-        return this.questions.get(questionNumber - 1);
+        
+        // return this.questions.get(questionNumber - 1);
+        for (Question question : this.questions) {
+            if (questionNumber == question.getNumber()) {
+                return question;
+
+            }
+        }
+        return null;
+        
     }
 
     public Subject getSubject() {

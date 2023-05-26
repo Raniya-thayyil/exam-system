@@ -4,16 +4,19 @@ import java.util.ArrayList;
 
 public class Examination {
 
+    private int examCode;
+
     private Subject subject;
     private int totalmark;
     QuestionPaper questionPaper;
 
     ArrayList<QuestionPaper> QuestionPaper = new ArrayList<>();
 
-    public Examination(Subject subject, QuestionPaper questionPaper) {
+    public Examination(int examCode, QuestionPaper questionPaper) {
 
-        this.subject = subject;
+        
         this.questionPaper = questionPaper;
+        this.examCode = examCode;
     }
 
     public Subject getSubject() {
@@ -32,8 +35,18 @@ public class Examination {
         this.totalmark = totalmark;
     }
 
-    public void exam(User user) {
-        user.attendExam(this);
+    public ArrayList<UserOption> exam(User user) {
+        return user.attendExam(this);
     }
+
+    public int getExamCode() {
+        return examCode;
+    }
+
+    public void setExamCode(int examCode) {
+        this.examCode = examCode;
+    }
+
+    
 
 }
