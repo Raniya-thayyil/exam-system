@@ -11,7 +11,7 @@ public class User {
     private int age;
     private String gender;
 
-    ArrayList<Integer> optionsChoosed = new ArrayList<>() ;
+    ArrayList<UserOption> optionsChoosed = new ArrayList<>();
 
     private int correctedAnswerCount;
     private double optainedMark;
@@ -39,14 +39,14 @@ public class User {
             this.age = age;
         }
     }
-    
+
     public String getGender() {
         return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
-    }    
+    }
 
     public int getCorrectedAnswerCount() {
         return correctedAnswerCount;
@@ -64,26 +64,35 @@ public class User {
         this.optainedMark = optainedMark;
     }
 
-    public ArrayList<Integer> attendExam(Examination exam) {
+    public ArrayList<UserOption> getAllselectedOptions(Examination exam) {
+        ArrayList<UserOption> optionDetails = new ArrayList<>();
 
-        for (int i = 0; i < exam.questionPaper.questions.size(); i++) {
-            System.out.println("choose option for question: " + exam.questionPaper.getQuestionOf(i + 1) + " : ");
-            int answer = scanner.nextInt();            
-            this.optionsChoosed.add(answer);            
+        for (UserOption optionsDetail : this.optionsChoosed) {
+            if (optionsDetail.getExamCode() == exam.getExamCode()) {
+                optionDetails.add(optionsDetail);
+
+            }
         }
-        return optionsChoosed;
-
+        return optionDetails;
     }
-    
+
+    public ArrayList<UserOption> attendExam(Examination exam) {
+        UserOption markOption = new UserOption();
+        for (Question q : exam.questionPaper.questions) {
+
+            System.out.println("choose option for question: " + q + " : ");
+            int answer = scanner.nextInt();
+            markOption = new UserOption(exam.getExamCode(), q, answer);
+            this.optionsChoosed.add(markOption);
+        }
+        return this.optionsChoosed;
+    }
+
     public void viewResult(Examination exam) {
+        System.out.println("result of " + this.getName() + " in " + exam.getName() + " : ");
         System.out.println("corrected nswers: " + this.getCorrectedAnswerCount());
         System.out.println("total mark is: " + this.getOptainedMark());
 
-        for (int i = 0; i < exam.questionPaper.questions.size(); i++) {
-            
-            System.out.println("choosed option: " + this.optionsChoosed.get(i)  + " , "  +  "correct answer: " + exam.questionPaper.questions.get(i).getAnswer());           
-        }
-        
     }
 
     @Override
