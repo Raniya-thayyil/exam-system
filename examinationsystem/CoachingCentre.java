@@ -25,38 +25,24 @@ public class CoachingCentre {
         this.exam = exam;
     }
 
-    // public void evaluate(User user, Examination exam) {
-    //     double totalMarkOfUser = 0;
-    //     int correctedAnswers = 0;
-    //     for (int i = 0; i < exam.questionPaper.questions.size(); i++) {
-    //         if (exam.questionPaper.getQuestionOf(i + 1).getAnswer() == user.optionsChoosed.get(i)) {
-    //             correctedAnswers++;
-    //             totalMarkOfUser += exam.questionPaper.getQuestionOf(i + 1).getMark();
-
-    //         } else {
-    //             totalMarkOfUser -= 1;
-    //         }
-    //     }
-
-    //     user.setCorrectedAnswerCount(correctedAnswers);
-    //     user.setOptainedMark(totalMarkOfUser);
-    //     System.out.println(user.getName() + " corrected " + correctedAnswers + " questions");
-    //     System.out.println("optained mark of " + user.getName() + " : " + totalMarkOfUser + " out of "
-    //             + exam.questionPaper.getTotalMark());
-    // }
-
     public void evaluate(User user, Examination exam) {
         double totalMarkOfUser = 0;
         int correctedAnswers = 0;
 
-        for (Question question : exam.questionPaper.questions) {
-            for (UserOption userEnteredOption : user.optionsChoosed) {
-                if (question.getAnswer() == userEnteredOption.getChoosedOption()) {
-                    
-                }
-
+        for (UserOption option : user.getAllselectedOptions(exam)) {
+            if (option.getQuestion().getAnswer() == option.getChoosedOption()) {
+                correctedAnswers++;
+                totalMarkOfUser += option.getQuestion().getMark();
+            } else {
+                totalMarkOfUser -= 1;
             }
         }
+        user.setCorrectedAnswerCount(correctedAnswers);
+        user.setOptainedMark(totalMarkOfUser);
+        System.out.println(user.getName() + " corrected " + correctedAnswers + " questions in " + exam.getName());
+        System.out.println("optained mark of " + user.getName() + " : " + totalMarkOfUser + " out of "
+                + exam.questionPaper.getTotalMark());
+
     }
 
 }

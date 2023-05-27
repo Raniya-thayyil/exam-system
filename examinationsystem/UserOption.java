@@ -1,26 +1,20 @@
 package examinationsystem;
 
 public class UserOption {
-
-    private int questionNumber;
+   
+    private Question question;
     private int choosedOption;
     private int examCode;
 
-    public UserOption(int examCode, int questionNumber, int choosedOption) {
-        this.questionNumber = questionNumber;
+    public UserOption(int examCode, Question question, int choosedOption) {
+        this.question = question;
         this.choosedOption = choosedOption;
         this.examCode = examCode;
     }
     public UserOption() {
 
     }
-        
-    public int getQuestionNumber() {
-        return questionNumber;
-    }
-    public void setQuestionNumber(int questionNumber) {
-        this.questionNumber = questionNumber;
-    }
+    
     public int getChoosedOption() {
         return choosedOption;
     }
@@ -33,15 +27,18 @@ public class UserOption {
     public void setExamCode(int examCode) {
         this.examCode = examCode;
     }
+    public Question getQuestion() {
+        return question;
+    }
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+   
     @Override
     public String toString() {
         return "UserOption [examCode="
-        + examCode + ", questionNumber=" + questionNumber + ", choosedOption=" + choosedOption + ", ]";
-    }
-   
-   
-    
-    
+        + examCode + ", questionNumber=" + this.question.getNumber() + ", choosedOption=" + choosedOption + "]";
+    }   
     
 
     
